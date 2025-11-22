@@ -17,11 +17,15 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-UPLOAD_FOLDER = "uploads"
-EMBEDDINGS_FOLDER = "embeddings"
+# Use /tmp for Vercel serverless, or local folders for development
+if os.environ.get('VERCEL'):
+    UPLOAD_FOLDER = "/tmp/uploads"
+    EMBEDDINGS_FOLDER = "/tmp/embeddings"
+else:
+    UPLOAD_FOLDER = "uploads"
+    EMBEDDINGS_FOLDER = "embeddings"
 
 # Create folders if they don't exist
-
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 os.makedirs(EMBEDDINGS_FOLDER, exist_ok=True)
 
